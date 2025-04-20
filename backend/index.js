@@ -2,8 +2,14 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path'
 import { randomUUID } from 'crypto';
+import cors from 'cors';
+import { route } from './routes/login.js';
 const app = express()
 const port = 3000;
+
+app.use(cors())
+app.use(express.json());
+app.use('/users', route);
 
 const storage = multer.diskStorage({
 
@@ -17,8 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-app.post('/uploads', upload.single('file'), (req, res) => {
-    console.log(req.file)
+app.post('/upload', upload.single('file'), (req, res) => {
     res.json({message: 'File uploaded successfuly', fileName: req.file.filename})
 });
 

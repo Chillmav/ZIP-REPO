@@ -1,0 +1,14 @@
+.login-box-flex {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    row-gap: 10px;
+    border-radius: 10px;
+}
+
+.login-text {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0;
+}

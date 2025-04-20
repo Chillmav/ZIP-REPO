@@ -1,39 +1,19 @@
 import './App.css'
 import WebcamComponent from './Components/WebcamComponent'
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import CamPage from './Pages/CamPage'
+import LogPage from './Pages/LogPage'
+
 function App() {
-  const [file, setFile] = useState(null);
-  
-  async function handleUpload() {
-
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const res = await fetch('http://localhost:3000/uploads', {
-      method: 'POST',
-      body: formData,
-
-    });
-    const result = await res.json();
-    console.log('Prediction result:', result)
-  }
-
-  useEffect(() => {
-
-    handleUpload()
-    
-    console.log('done')
-
-  }, [file])
 
   return (
-    <>
-      <WebcamComponent
-      setFile = {setFile}
-       />
-    </>
+    <Routes>
+
+      <Route path='/' element={<LogPage />} />
+      <Route path='/Cam' element={<CamPage />} />
+
+    </Routes>
   )
 }
 
