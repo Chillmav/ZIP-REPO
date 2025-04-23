@@ -12,6 +12,7 @@ let db, usersCollection;
 async function run() {
 
     try {
+
         await client.connect();
         console.log('Connected to MongoDB');
 
@@ -19,6 +20,7 @@ async function run() {
         usersCollection = db.collection('users');
 
         return { client, db, usersCollection};
+        
     }
 
     catch (err) {
