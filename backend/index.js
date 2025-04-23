@@ -1,9 +1,10 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path'
-import { randomUUID } from 'crypto';
 import cors from 'cors';
 import { route } from './routes/login.js';
+import { userData } from './routes/login.js';
+
 const app = express()
 const port = 3000;
 
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        cb(null,  randomUUID() + path.extname(file.originalname));
+        cb(null,  `${userData.firstName}-${userData.secondName}` + path.extname(file.originalname));
     }
 })
 
