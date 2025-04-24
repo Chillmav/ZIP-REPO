@@ -1,45 +1,9 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
-
+import { usersCollection } from '../db.js';
 export const route = express.Router()
 export let userData;
-const uri = 'mongodb+srv://272408:xgJarlUbM9puLXWH@cluster0.qxfsslt.mongodb.net/';
 
-const client = new MongoClient(uri);
-
-let db, usersCollection;
-
-async function run() {
-
-    try {
-
-        await client.connect();
-        console.log('Connected to MongoDB');
-
-        db = client.db("ZPI");
-        usersCollection = db.collection('users');
-
-        return { client, db, usersCollection};
-        
-    }
-
-    catch (err) {
-
-        console.log("Connection error:", err);
-        if (client) await client.close();
-        throw err;
-
-    }
-}
-
-(async () => {
-    try {
-        await run();
-    } catch (err) {
-        console.error("Failed to initialize database:", err);
-        throw err
-    }
-})();
 
 route.post('/', async (req, res) => {
     

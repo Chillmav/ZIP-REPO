@@ -4,13 +4,26 @@ import path from 'path'
 import cors from 'cors';
 import { route } from './routes/login.js';
 import { userData } from './routes/login.js';
+import { run } from './db.js';
 
 const app = express()
 const port = 3000;
+const corsOptions = {
+    origin: 'http://localhost:5173', // Replace with your frontend URL (e.g., Vite/React)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  };
+  
+app.use(cors(corsOptions)); // Apply CORS with options
 
-app.use(cors())
-app.use(express.json());
-app.use('/users', route);
+run().then(() => {
+    
+    app.use(express.json());
+    app.use('/users', route);
+}).catch(err => console.log('Error', err))
+
+
+
 
 const storage = multer.diskStorage({
 
