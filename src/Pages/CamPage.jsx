@@ -49,6 +49,7 @@ export default function CamPage() {
       const res = await fetch('http://localhost:3000/ranking');
       const data = await res.json();
       console.log(data)
+      setUploaded(false)
       return data
     }
     if (uploaded) {
