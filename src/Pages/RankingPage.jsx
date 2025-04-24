@@ -1,13 +1,13 @@
 import FrameBox from "../Components/FrameBox"
-import { frameList } from "../utils/frames.js"
 import './../styles/RankingPage/RankingPage.css'
 import priceTransform from "../utils/priceTransform.js"
-export default function RankingPage() {
+export default function RankingPage({ data }) {
+    console.log(data)
     return (
         <div
         className="frames-box"
         >  
-            {frameList.map((item) => (
+            {data.map((item) => (
                 <FrameBox
                     price = {priceTransform(item.price)}
                     img = {item.img}
@@ -15,10 +15,11 @@ export default function RankingPage() {
                     material = {item.material}
                     color = {item.color}
                     mark = {item.mark}
-                    key={item.id}
+                    key={item._id}
                 />
-
+                
             ))}
+            
         </div>
     )
 }   

@@ -2,7 +2,7 @@ import WebcamComponent from '../Components/WebcamComponent'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function CamPage() {
+export default function CamPage({ setData }) {
 
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
@@ -48,6 +48,7 @@ export default function CamPage() {
 
       const res = await fetch('http://localhost:3000/ranking');
       const data = await res.json();
+      setData(data);
       console.log(data)
       setUploaded(false)
       return data
