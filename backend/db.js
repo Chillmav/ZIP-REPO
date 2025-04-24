@@ -4,7 +4,7 @@ const uri = 'mongodb+srv://272408:xgJarlUbM9puLXWH@cluster0.qxfsslt.mongodb.net/
 
 const client = new MongoClient(uri);
 
-let db, usersCollection;
+let db, usersCollection, framesCollection;
 
 export async function run() {
 
@@ -15,7 +15,7 @@ export async function run() {
 
         db = client.db("ZPI");
         usersCollection = db.collection('users');
-
+        framesCollection = db.collection('frames');
         return { client, db, usersCollection};
         
     }
@@ -29,4 +29,4 @@ export async function run() {
     }
 }
 
-export {db, usersCollection};
+export {db, usersCollection, framesCollection};

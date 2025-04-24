@@ -5,6 +5,8 @@ import cors from 'cors';
 import { route } from './routes/login.js';
 import { userData } from './routes/login.js';
 import { run } from './db.js';
+import { RankingRoute } from './routes/ranking.js';
+import {toggleUploadedFile, checkUploadedFile} from './utils/setUploadedFile.js'
 
 const app = express()
 const port = 3000;
@@ -20,6 +22,7 @@ run().then(() => {
     
     app.use(express.json());
     app.use('/users', route);
+
 }).catch(err => console.log('Error', err))
 
 
@@ -38,9 +41,12 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 app.post('/upload', upload.single('file'), (req, res) => {
+    toggleUploadedFile();
     res.json({message: 'File uploaded successfuly', fileName: req.file.filename})
-});
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)
 })
+
+app.use('/ranking', checkUploadedFile, RankingRoute)
