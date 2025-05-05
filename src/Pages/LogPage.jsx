@@ -1,15 +1,16 @@
-import './../styles/LoginPage/LogPage.css'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Preferences from '../Components/Preferences';
 
 export default function LogPage() {
 
     const [personData, setPersonData] = useState([]);
     const firstNameRef = useRef(null);
     const secondNameRef = useRef(null);
+    const [pricePreference, setPricePreference] = useState(50);
     const navigate = useNavigate();
     const [isloggedIn, setIsLoggedIn] = useState(false)
-    
+
     function login() {
 
         const data = [firstNameRef.current.value, secondNameRef.current.value]
@@ -41,20 +42,25 @@ export default function LogPage() {
         }
     }, [isloggedIn])
     return (
-
-        <div
-        className="login-box-flex"
-        >
-            <p
-            className='login-text'
-            >Log in</p>
-            <input placeholder="First Name" className='input' ref={firstNameRef} />
-            <input placeholder="Second Name" className='input' ref={secondNameRef} />
-            <button className='button' onClick={() => {
-                login();
-                clearInputs();
-            }}>Log in</button>
-
+        <div className='flex flex-row bg-white rounded-2xl'>
+            <div
+            className='flex flex-col p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[340px] items-center'
+            >
+                <p
+                className='text-[25px] font-semibold m-[0px]'
+                >Log in</p>
+                <input placeholder="First Name" className='w-[300px] rounded-[5px] border-[#b0b0b0] border-[1px] py-[10px] px-[5px] cursor-pointer' ref={firstNameRef} />
+                <input placeholder="Second Name" className='w-[300px] rounded-[5px] border-[#b0b0b0] border-[1px] py-[10px] px-[5px] cursor-pointer' ref={secondNameRef} />
+                
+                <button className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-white bg-[#078c9b] cursor-pointer transition-bg-0.3s hover:bg-[#0abfbf]' onClick={() => {
+                    login();
+                    clearInputs();
+                }}>Log in</button>
+            </div>
+            <Preferences
+            pricePreference={pricePreference}
+            setPricePreference={setPricePreference}
+            />
         </div>
     )
 }
