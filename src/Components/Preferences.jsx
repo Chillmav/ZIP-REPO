@@ -1,11 +1,11 @@
 import preferences from "../utils/preferences.js";
 import Preference from "./Preference";
 
-export default function Preferences({ pricePreference, setPricePreference }) {
+export default function Preferences({ userPreferences, setUserPreferences }) {
 
     
     return (
-        <div className="flex flex-col p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[500px]">
+        <div className="flex flex-col bg-amber-100 p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[500px] m-[10px]">
             <p className='text-[25px] font-semibold mx-auto'>Preferences</p>
             <div className="flex space-x-5 items-center">
                 <label className="text-[20px] font-bold">Price:</label>
@@ -14,9 +14,12 @@ export default function Preferences({ pricePreference, setPricePreference }) {
                 type="range"
                 min={0}
                 max={100}
-                value={pricePreference}
+                value={userPreferences.Price}
                 onChange={(event) => {
-                    setPricePreference(event.target.value)
+                    setUserPreferences((prev) => ({
+                        ...prev,
+                        Price: Number(event.target.value)
+                    }));
                 }}
                 className="w-[260px] appearance-none rounded-2xl"
                 style={{
@@ -27,7 +30,7 @@ export default function Preferences({ pricePreference, setPricePreference }) {
                     backgroundColor: '#078c9b',
                   }}
                 />
-                <p>($0 - ${pricePreference * 20})</p>
+                <p>($0 - ${userPreferences.Price * 20})</p>
 
             </div>
 
@@ -36,7 +39,9 @@ export default function Preferences({ pricePreference, setPricePreference }) {
                     return (
                         <Preference
                         key={i}
-                        name={preference}
+                        preference={preference}
+                        userPreferences={userPreferences}
+                        setUserPreferences={setUserPreferences}
                         
                         />
                     )
