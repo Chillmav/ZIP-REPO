@@ -15,6 +15,13 @@ export default function LogPage() {
             Color: []
         }
     );
+    const [userImportances, setUserImportances] = useState({
+        Price: 2.5,
+        Shape: 2.5,
+        Mark: 2.5,
+        Type: 2.5,
+        Color: 2.5
+    })
     const navigate = useNavigate();
     const [isloggedIn, setIsLoggedIn] = useState(false)
 
@@ -73,6 +80,8 @@ export default function LogPage() {
             <Preferences
             userPreferences={userPreferences}
             setUserPreferences={setUserPreferences}
+            userImportances={userImportances}
+            setUserImportances={setUserImportances}
             />
         </div>
     )

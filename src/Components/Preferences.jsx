@@ -1,11 +1,12 @@
 import preferences from "../utils/preferences.js";
 import Preference from "./Preference";
+import Stars from "./stars.jsx";
 
-export default function Preferences({ userPreferences, setUserPreferences }) {
+export default function Preferences({ userPreferences, setUserPreferences, userImportances, setUserImportances }) {
 
     
     return (
-        <div className="flex flex-col bg-amber-100 p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[500px] m-[10px]">
+        <div className="flex flex-col bg-amber-100 p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-auto m-[10px]">
             <p className='text-[25px] font-semibold mx-auto'>Preferences</p>
             <div className="flex space-x-5 items-center">
                 <label className="text-[20px] font-bold">Price:</label>
@@ -21,7 +22,7 @@ export default function Preferences({ userPreferences, setUserPreferences }) {
                         Price: Number(event.target.value)
                     }));
                 }}
-                className="w-[260px] appearance-none rounded-2xl"
+                className="w-[200px] appearance-none rounded-2xl"
                 style={{
                     WebkitAppearance: 'none',
                     appearance: 'none',
@@ -31,7 +32,7 @@ export default function Preferences({ userPreferences, setUserPreferences }) {
                   }}
                 />
                 <p>($0 - ${userPreferences.Price * 20})</p>
-
+                <Stars />
             </div>
 
             <div className="grid grid-cols-2 space-y-8 mt-2 space-x-2">
@@ -42,7 +43,8 @@ export default function Preferences({ userPreferences, setUserPreferences }) {
                         preference={preference}
                         userPreferences={userPreferences}
                         setUserPreferences={setUserPreferences}
-                        
+                        userImportances={userImportances}
+                        setUserImportances={setUserImportances}
                         />
                     )
                 })}
