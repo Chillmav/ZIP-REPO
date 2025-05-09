@@ -18,7 +18,8 @@ export default function Preference( {preference, userPreferences, setUserPrefere
             <div className="flex">
                 <p className="text-[20px] font-bold">{preference}:</p>
                 <Stars
-                value={userImportances.preference}
+                preference={preference}
+                value={userImportances[preference]}
                 setUserImportances={setUserImportances}
                 />
             </div>

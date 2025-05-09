@@ -32,7 +32,11 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                   }}
                 />
                 <p>($0 - ${userPreferences.Price * 20})</p>
-                <Stars />
+                <Stars
+                preference={'Price'}
+                value={userImportances['Price']}
+                setUserImportances={setUserImportances}
+                 />
             </div>
 
             <div className="grid grid-cols-2 space-y-8 mt-2 space-x-2">
