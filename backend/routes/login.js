@@ -7,8 +7,8 @@ export let userData;
 
 route.post('/', async (req, res) => {
     
-    const { firstName, secondName, Price, Shape, Mark, Type } = req.body
-    userData = { firstName, secondName, Price, Shape, Mark, Type };
+    const { firstName, secondName, userPreferences, userImportances } = req.body
+    userData = { firstName, secondName, userPreferences, userImportances };
     if (!firstName || !secondName) {
 
         return res.status(400).json({message: "Both first name and second name are required"})
@@ -20,10 +20,8 @@ route.post('/', async (req, res) => {
         await usersCollection.insertOne({
             firstName,
             secondName,
-            Price, 
-            Shape, 
-            Mark, 
-            Type,
+            userPreferences,
+            userImportances,
             createdAt: new Date()
         });
 

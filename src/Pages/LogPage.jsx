@@ -6,8 +6,10 @@ export default function LogPage() {
 
     const firstNameRef = useRef(null);
     const secondNameRef = useRef(null);
+    
     const [userPreferences, setUserPreferences] = useState(
         {
+            AI: 50,
             Price: 50,
             Shape: [],
             Mark: [],
@@ -15,6 +17,7 @@ export default function LogPage() {
             Color: []
         }
     );
+
     const [userImportances, setUserImportances] = useState({
         Price: 2.5,
         Shape: 2.5,
@@ -22,6 +25,7 @@ export default function LogPage() {
         Type: 2.5,
         Color: 2.5
     })
+
     const navigate = useNavigate();
     const [isloggedIn, setIsLoggedIn] = useState(false)
 
@@ -49,8 +53,7 @@ export default function LogPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({firstName: firstNameRef.current.value, secondName: secondNameRef.current.value, Price: userPreferences.Price, 
-                    Shape: userPreferences.Shape, Mark: userPreferences.Mark, Type: userPreferences.Type, Color: userPreferences.Color})
+                body: JSON.stringify({firstName: firstNameRef.current.value, secondName: secondNameRef.current.value, userPreferences: userPreferences, userImportances: userImportances})
             })
             .then(res => res.json())
             .then(res => {
@@ -62,10 +65,13 @@ export default function LogPage() {
     }, [isloggedIn])
     
     return (
+
         <div className='flex flex-row bg-white rounded-2xl'>
+
             <div
             className='flex flex-col justify-center p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[340px] items-center'
             >
+
                 <p
                 className='text-[25px] font-semibold m-[0px]'
                 >Log in</p>
@@ -76,13 +82,17 @@ export default function LogPage() {
                     login();
                     
                 }}>Log in</button>
+
             </div>
+
             <Preferences
             userPreferences={userPreferences}
             setUserPreferences={setUserPreferences}
             userImportances={userImportances}
             setUserImportances={setUserImportances}
             />
+
         </div>
+
     )
 }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CamPage({ setData }) {
 
   const [file, setFile] = useState(null);
+  const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
   const [uploaded, setUploaded] = useState(false);
 
@@ -71,6 +72,8 @@ export default function CamPage({ setData }) {
     <>
       <WebcamComponent
       setFile = {setFile}
+      setPhoto = {setPhoto}
+      photo = {photo}
        />
     </>
   )

@@ -1,7 +1,8 @@
 import { useCallback, useRef } from 'react'
 import Webcam from 'react-webcam'
+import ImageUploader from './ImageUploader.jsx';
 
-export default function WebcamComponent ({ setFile }) {
+export default function WebcamComponent ({ setFile, setPhoto, photo }) {
 
     const webcamRef = useRef(null);
     const capture = useCallback(() => {
@@ -23,18 +24,49 @@ export default function WebcamComponent ({ setFile }) {
         setFile(file);
     }, [webcamRef]);
 
+    function addPhoto() {
+
+        if (!photo) return;
+
+        setFile(photo);
+        
+    }
+
     return (
-        <>
+        <div className='flex flex-col bg-white rounded-2xl p-6 space-y-[40px]'>
+
             <Webcam
             ref={webcamRef}
             screenshotFormat='image/jpeg'
+            className='rounded-2xl'
             />
             
-            <button
-            onClick={capture}
-            >
-                Capture photo
-            </button>
-        </>
+            <div className='flex justify-between'>
+                <button
+                onClick={capture}
+                className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-white bg-[#078c9b] cursor-pointer transition-bg-0.3s hover:bg-[#0abfbf]'
+                >
+
+                    Capture photo
+                    
+                </button>
+                <div className='flex'>
+
+                    <button
+                    className='w-[300px] rounded-br-none rounded-tr-none rounded-[5px] border-[1px] py-[10px] px-[5px] text-white bg-[#078c9b] cursor-pointer transition-bg-0.3s hover:bg-[#0abfbf]'
+                    onClick={addPhoto}
+                    >
+                        Add photo
+                    </button>
+                    <ImageUploader
+                    photo = {photo}
+                    setPhoto = {setPhoto}
+                    setFile={setFile}
+                    />
+
+                </div>
+
+            </div>
+        </div>
     )
 }
