@@ -1,8 +1,7 @@
-import preferences from "../utils/preferences.js";
 import Preference from "./Preference";
 import Stars from "./stars.jsx";
 
-export default function Preferences({ userPreferences, setUserPreferences, userImportances, setUserImportances }) {
+export default function Preferences({ userPreferences, setUserPreferences, userImportances, setUserImportances, preferences }) {
 
     
     return (
@@ -39,7 +38,7 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                     <input 
                     id="slider"
                     type="range"
-                    min={0}
+                    min={10}
                     max={100}
                     value={userPreferences.Price}
                     onChange={(event) => {
@@ -57,7 +56,7 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                         backgroundColor: '#078c9b',
                     }}
                     />
-                    <p className="w-[60px]">(${userPreferences.Price * 20})</p>
+                    <p className="w-[90px]">({userPreferences.Price * 10} PLN)</p>
                     <Stars
                     preference={'Price'}
                     value={userImportances['Price']}
@@ -76,6 +75,7 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                         setUserPreferences={setUserPreferences}
                         userImportances={userImportances}
                         setUserImportances={setUserImportances}
+                        preferences={preferences}
                         />
                     )
                 })}

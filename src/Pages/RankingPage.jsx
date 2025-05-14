@@ -1,11 +1,11 @@
 import FrameBox from "../Components/FrameBox"
-import './../styles/RankingPage/RankingPage.css'
 import priceTransform from "../utils/priceTransform.js"
+
 export default function RankingPage({ data }) {
     console.log(data)
     return (
         <div
-        className="frames-box"
+        className="flex flex-col rounded-2xl h-[650px] overflow-auto border-[2px] p-[10px] border-[rgb(146,146,146)] space-y-2 w-[1000px] -mt-[100px]"
         >  
             {data.map((item) => (
                 <FrameBox

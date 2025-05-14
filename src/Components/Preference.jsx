@@ -1,7 +1,7 @@
-import preferences from "../utils/preferences.js"
 import Stars from "./stars.jsx";
+import './../styles/scroll.css';
 
-export default function Preference( {preference, userPreferences, setUserPreferences, userImportances, setUserImportances} ) {
+export default function Preference( {preference, userPreferences, setUserPreferences, userImportances, setUserImportances, preferences} ) {
 
     function changePreferences(value) {
         setUserPreferences((prev) => {
@@ -15,7 +15,7 @@ export default function Preference( {preference, userPreferences, setUserPrefere
     }
     return (
         <div className="flex flex-col space-y-2">
-            <div className="flex">
+            <div className="flex ">
                 <p className="text-[20px] font-bold">{preference}:</p>
                 <Stars
                 preference={preference}
@@ -24,7 +24,8 @@ export default function Preference( {preference, userPreferences, setUserPrefere
                 />
             </div>
 
-            
+            <div className="scroll">
+
                 {preferences[preference].map((elem, index) => {
 
                     return (
@@ -37,6 +38,7 @@ export default function Preference( {preference, userPreferences, setUserPrefere
                     )
                 })}
 
+            </div>
             
     </div>
     )

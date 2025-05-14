@@ -6,7 +6,19 @@ export default function LogPage() {
 
     const firstNameRef = useRef(null);
     const secondNameRef = useRef(null);
-    
+    const [preferences, setPreferences] = useState({});
+
+    useEffect(() => {
+        fetch("http://localhost:3000/frames", {
+            method: "GET"
+        })
+        .then(res => res.json())
+        .then(data => {
+            setPreferences(data)
+            console.log(data)
+        }
+        )
+    }, [])
     const [userPreferences, setUserPreferences] = useState(
         {
             AI: 50,
@@ -64,7 +76,8 @@ export default function LogPage() {
         }
     }, [isloggedIn])
     
-    return (
+    if (preferences.Shape) {
+        return (
 
         <div className='flex flex-row rounded-2xl backdrop-blur-[8px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.6)]'>
 
@@ -86,6 +99,7 @@ export default function LogPage() {
             </div>
 
             <Preferences
+            preferences={preferences}
             userPreferences={userPreferences}
             setUserPreferences={setUserPreferences}
             userImportances={userImportances}
@@ -95,4 +109,6 @@ export default function LogPage() {
         </div>
 
     )
+    }
+    
 }

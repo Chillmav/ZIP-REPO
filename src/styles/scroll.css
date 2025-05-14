@@ -1,0 +1,9 @@
+.scroll {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+    height: 102px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #078c9b white;
+}
