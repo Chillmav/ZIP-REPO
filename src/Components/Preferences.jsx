@@ -6,10 +6,10 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
 
     
     return (
-        <div className="flex flex-col backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,197,217,0.3)] p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-auto m-[10px]">
+        <div className="flex flex-col backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(216,176,190,0.2)] p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-auto m-[10px]">
             <p className='text-[25px] font-semibold mx-auto mb-4'>Preferences</p>
             <div className="flex flex-col space-y-5">
-                <div className="flex items-center space-x-2 justify-center">
+                <div className="flex items-center space-x-2">
                     <label className="text-[20px] font-bold">AI:</label>
                     <input 
                     id="slider"
@@ -35,7 +35,7 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                     <p className="text-[20px] font-bold">Your Preferences</p>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <label className="text-[20px] font-bold">Price:</label>
+                    <label className="text-[20px] font-bold">Max:</label>
                     <input 
                     id="slider"
                     type="range"
@@ -57,7 +57,7 @@ export default function Preferences({ userPreferences, setUserPreferences, userI
                         backgroundColor: '#078c9b',
                     }}
                     />
-                    <p className="w-[100px]">($0 - ${userPreferences.Price * 20})</p>
+                    <p className="w-[60px]">(${userPreferences.Price * 20})</p>
                     <Stars
                     preference={'Price'}
                     value={userImportances['Price']}

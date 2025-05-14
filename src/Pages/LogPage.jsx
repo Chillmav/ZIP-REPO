@@ -66,7 +66,7 @@ export default function LogPage() {
     
     return (
 
-        <div className='flex flex-row rounded-2xl backdrop-blur-[8px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.5)]'>
+        <div className='flex flex-row rounded-2xl backdrop-blur-[8px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.6)]'>
 
             <div
             className='flex flex-col justify-center p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[340px] items-center'
