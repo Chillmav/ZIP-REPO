@@ -1,6 +1,5 @@
 .framebox-flex {
     display: flex;
-    background-color: white;
     border: solid;
     border-width: 3px;
     border-radius: 10px;

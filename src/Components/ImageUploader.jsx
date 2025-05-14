@@ -1,7 +1,6 @@
-import { useState, useRef } from "react"
-import axios from 'axios'
+import { useRef } from "react"
 import { FaUpload } from "react-icons/fa";
-export default function ImageUploader( { setPhoto, photo }) {
+export default function ImageUploader( { setPhoto }) {
 
     const photoInputRef = useRef(null);
 
@@ -21,10 +20,10 @@ export default function ImageUploader( { setPhoto, photo }) {
         className="object-cover"
         >
             <button
-            className="w-full h-full bg-amber-200 cursor-pointer rounded-br-[5px] rounded-tr-[5px]"
+            className="w-full h-full backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer rounded-br-[5px] rounded-tr-[5px] border-[1px]"
             onClick={handleClick}>
                 <FaUpload
-                className="w-full h-full"
+                className="w-[50px] h-100% "
                  />
             </button>
 

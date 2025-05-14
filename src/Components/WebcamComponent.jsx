@@ -33,7 +33,7 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
     }
 
     return (
-        <div className='flex flex-col bg-white rounded-2xl p-6 space-y-[40px]'>
+        <div className='flex flex-col backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(17,25,40,0.10)] rounded-2xl p-6 space-y-[40px]'>
 
             <Webcam
             ref={webcamRef}
@@ -41,10 +41,10 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
             className='rounded-2xl'
             />
             
-            <div className='flex justify-between'>
+            <div className='flex justify-between space-x-5'>
                 <button
                 onClick={capture}
-                className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-white bg-[#078c9b] cursor-pointer transition-bg-0.3s hover:bg-[#0abfbf]'
+                className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
                 >
 
                     Capture photo
@@ -53,7 +53,7 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
                 <div className='flex'>
 
                     <button
-                    className='w-[300px] rounded-br-none rounded-tr-none rounded-[5px] border-[1px] py-[10px] px-[5px] text-white bg-[#078c9b] cursor-pointer transition-bg-0.3s hover:bg-[#0abfbf]'
+                    className='w-[300px] rounded-br-none rounded-tr-none rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
                     onClick={addPhoto}
                     >
                         Add photo
