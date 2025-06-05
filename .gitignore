@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
 node_modules
 dist
 dist-ssr
@@ -14,6 +13,8 @@ dist-ssr
 rows.json
 zdjecia_oprawek
 uploads
+backend/model
+backend/zdjecia_oprawek
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

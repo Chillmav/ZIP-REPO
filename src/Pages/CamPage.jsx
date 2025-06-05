@@ -2,30 +2,34 @@ import WebcamComponent from '../Components/WebcamComponent'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function CamPage({ setData }) {
+export default function CamPage({ setData, user }) {
 
   const [file, setFile] = useState(null);
   const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
-  const [uploaded, setUploaded] = useState(false);
+
+  // const [uploaded, setUploaded] = useState(false);
 
   async function handleUpload() {
 
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('userInput', JSON.stringify(user));
+    formData.append('photo', file)
 
-    const res = await fetch('http://localhost:3000/upload', {
+    const res = await fetch('http://127.0.0.1:8000/user', {
       method: 'POST',
       body: formData,
 
     });
-    const result = await res.json();
-    console.log('Prediction result:', result)
-    return result
 
+    const result = await res.json();
+
+    return result
   }
+
+  
 
   useEffect(() => {
 
@@ -34,8 +38,11 @@ export default function CamPage({ setData }) {
       const result = await handleUpload();
 
       if (result) {
+
           console.log('done')
-          setUploaded(true)
+          setData(result)
+          navigate('/ranking')
+
       }
 
     }
@@ -43,30 +50,30 @@ export default function CamPage({ setData }) {
 
   }, [file])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const fetchingFramesAndNavigating = async () => {
+  //   const fetchingFramesAndNavigating = async () => {
 
-      const res = await fetch('http://localhost:3000/ranking');
-      const data = await res.json();
-      setData(data);
-      console.log(data)
-      setUploaded(false)
-      return data
-    }
-    if (uploaded) {
-      const result = fetchingFramesAndNavigating()
-      if (result) {
-        setTimeout(() => {
-          navigate('/ranking')
-        }, 2000)
+  //     const res = await fetch('http://localhost:3000/ranking');
+  //     const data = await res.json();
+  //     setData(data);
+  //     console.log(data)
+  //     setUploaded(false)
+  //     return data
+  //   }
+  //   if (uploaded) {
+  //     const result = fetchingFramesAndNavigating()
+  //     if (result) {
+  //       setTimeout(() => {
+  //         navigate('/ranking')
+  //       }, 2000)
         
-      }
+  //     }
 
-    }
+  //   }
     
     
-  }, [uploaded])
+  // }, [uploaded])
 
   return (
     <>

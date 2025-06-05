@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Preferences from '../Components/Preferences';
 
-export default function LogPage() {
+export default function LogPage({ setUser }) {
 
     const firstNameRef = useRef(null);
     const secondNameRef = useRef(null);
     const [preferences, setPreferences] = useState({});
 
     useEffect(() => {
-        fetch("http://localhost:3000/frames", {
+        fetch("http://127.0.0.1:8000/frames", {
             method: "GET"
         })
         .then(res => res.json())
@@ -53,29 +53,15 @@ export default function LogPage() {
 
     }
 
-    function clearInputs() {
-        firstNameRef.current.value = ''
-        secondNameRef.current.value = ''
-    }
-
     useEffect(() => {
+
         if (isloggedIn) {
-            fetch('http://localhost:3000/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({firstName: firstNameRef.current.value, secondName: secondNameRef.current.value, userPreferences: userPreferences, userImportances: userImportances})
-            })
-            .then(res => res.json())
-            .then(res => {
-                console.log('Response from server: ', res);
-                clearInputs();
-                navigate('/Cam');
-            })
+            setUser([firstNameRef.current.value, secondNameRef.current.value, userPreferences, userImportances]);
+            navigate('/Cam');
         }
+        
     }, [isloggedIn])
-    
+
     if (preferences.Shape) {
         return (
 
