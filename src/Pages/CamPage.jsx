@@ -8,8 +8,6 @@ export default function CamPage({ setData, user }) {
   const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
 
-  // const [uploaded, setUploaded] = useState(false);
-
   async function handleUpload() {
 
     if (!file) return;
@@ -49,31 +47,6 @@ export default function CamPage({ setData, user }) {
     uploadAndSet();
 
   }, [file])
-
-  // useEffect(() => {
-
-  //   const fetchingFramesAndNavigating = async () => {
-
-  //     const res = await fetch('http://localhost:3000/ranking');
-  //     const data = await res.json();
-  //     setData(data);
-  //     console.log(data)
-  //     setUploaded(false)
-  //     return data
-  //   }
-  //   if (uploaded) {
-  //     const result = fetchingFramesAndNavigating()
-  //     if (result) {
-  //       setTimeout(() => {
-  //         navigate('/ranking')
-  //       }, 2000)
-        
-  //     }
-
-  //   }
-    
-    
-  // }, [uploaded])
 
   return (
     <>
