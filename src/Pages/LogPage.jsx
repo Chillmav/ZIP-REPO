@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Preferences from '../Components/Preferences';
 
-export default function LogPage() {
+export default function LogPage({ setName }) {
 
     const firstNameRef = useRef(null);
     const secondNameRef = useRef(null);
@@ -58,6 +58,7 @@ export default function LogPage() {
         secondNameRef.current.value = ''
     }
 
+    /* 
     useEffect(() => {
         if (isloggedIn) {
             fetch('http://localhost:3000/users', {
@@ -75,7 +76,15 @@ export default function LogPage() {
             })
         }
     }, [isloggedIn])
-    
+    */
+
+    useEffect(() => {
+        if (isloggedIn) {
+            setName([firstNameRef.current.value, secondNameRef.current.value, userPreferences, userImportances]);
+            navigate('/Cam');
+        }
+    }, [isloggedIn])
+
     if (preferences.Shape) {
         return (
 

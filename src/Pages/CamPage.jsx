@@ -2,71 +2,61 @@ import WebcamComponent from '../Components/WebcamComponent'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function CamPage({ setData }) {
+export default function CamPage({ setData, name }) {
 
   const [file, setFile] = useState(null);
   const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
   const [uploaded, setUploaded] = useState(false);
-
+  
   async function handleUpload() {
 
     if (!file) return;
 
     const formData = new FormData();
+    formData.append('userData', JSON.stringify(name));
     formData.append('file', file);
-
+    
     const res = await fetch('http://localhost:3000/upload', {
       method: 'POST',
       body: formData,
 
     });
+
     const result = await res.json();
     console.log('Prediction result:', result)
+
     return result
 
   }
+useEffect(() => {
+  if (!file) return;
 
-  useEffect(() => {
+  const uploadAndRecommend = async () => {
 
-    const uploadAndSet = async () => {
+    // 1. Upload
 
-      const result = await handleUpload();
+    const uploadResult = await handleUpload();
+    if (!uploadResult) return;
 
-      if (result) {
-          console.log('done')
-          setUploaded(true)
-      }
+    // 2. Call recommend endpoint
 
-    }
-    uploadAndSet();
+    const res = await fetch('http://localhost:3000/recommend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        preferences: uploadResult.userData
+      }),
+    });
 
-  }, [file])
+    const recommendations = await res.json();
+    setData(recommendations);
+    navigate('/ranking');
+  };
 
-  useEffect(() => {
+  uploadAndRecommend();
 
-    const fetchingFramesAndNavigating = async () => {
-
-      const res = await fetch('http://localhost:3000/ranking');
-      const data = await res.json();
-      setData(data);
-      console.log(data)
-      setUploaded(false)
-      return data
-    }
-    if (uploaded) {
-      const result = fetchingFramesAndNavigating()
-      if (result) {
-        setTimeout(() => {
-          navigate('/ranking')
-        }, 2000)
-        
-      }
-
-    }
-    
-    
-  }, [uploaded])
+}, [file]);
 
   return (
     <>
