@@ -1,9 +1,32 @@
+/* styles/scroll.css */
 .scroll {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2px;
-    height: 102px;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #078c9b white;
+  max-height: 100px;
+  overflow-y: auto;
+  padding-right: 6px; /* space for scrollbar */
+}
+
+/* WebKit Scrollbar */
+.scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #078c9b, #5bc6d8);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #05a0b0, #68d1e0);
+}
+
+/* Firefox */
+.scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #078c9b transparent;
 }

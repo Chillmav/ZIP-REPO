@@ -4,10 +4,8 @@ import Preferences from '../Components/Preferences';
 
 export default function LogPage({ setUser }) {
 
-    const firstNameRef = useRef(null);
-    const secondNameRef = useRef(null);
     const [preferences, setPreferences] = useState({});
-
+    const [showPopup, setShowPopup] = useState(false);
     useEffect(() => {
         fetch("http://127.0.0.1:8000/frames", {
             method: "GET"
@@ -42,21 +40,20 @@ export default function LogPage({ setUser }) {
     const [isloggedIn, setIsLoggedIn] = useState(false)
 
     function login() {
-
-        for (let preference of Object.keys(userPreferences)) {
-            if (!userPreferences[preference].length && !Number(userPreferences[preference])) {
-                console.error('You didn`t choose all your preferences');
-                return 0;
-            }   
-        }
-        setIsLoggedIn(true);
-
+    for (let preference of Object.keys(userPreferences)) {
+        if (!userPreferences[preference].length && !Number(userPreferences[preference])) {
+            console.error('You didn’t choose all your preferences');
+            setShowPopup(true); // show popup
+            return 0;
+        } 
+    }
+    setIsLoggedIn(true);
     }
 
     useEffect(() => {
 
         if (isloggedIn) {
-            setUser([firstNameRef.current.value, secondNameRef.current.value, userPreferences, userImportances]);
+            setUser([userPreferences, userImportances]);
             navigate('/Cam');
         }
         
@@ -65,24 +62,7 @@ export default function LogPage({ setUser }) {
     if (preferences.Shape) {
         return (
 
-        <div className='flex flex-row rounded-2xl backdrop-blur-[8px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.6)]'>
-
-            <div
-            className='flex flex-col justify-center p-[20px] gap-x-[10px] rounded-[10px] gap-y-[10px] w-[340px] items-center'
-            >
-
-                <p
-                className='text-[25px] font-semibold m-[0px]'
-                >Log in</p>
-                <input placeholder="First Name" className='w-[300px] rounded-[5px] border-[#b0b0b0] border-[1px] py-[10px] px-[5px] cursor-pointer' ref={firstNameRef} />
-                <input placeholder="Second Name" className='w-[300px] rounded-[5px] border-[#b0b0b0] border-[1px] py-[10px] px-[5px] cursor-pointer' ref={secondNameRef} />
-                
-                <button className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]' onClick={() => {
-                    login();
-                    
-                }}>Log in</button>
-
-            </div>
+        <div className='flex flex-col rounded-2xl backdrop-blur-[8px] backdrop-saturate-[180%] bg-[rgba(255, 255, 255, 0.6)]'>
 
             <Preferences
             preferences={preferences}
@@ -91,7 +71,22 @@ export default function LogPage({ setUser }) {
             userImportances={userImportances}
             setUserImportances={setUserImportances}
             />
-
+            <button className='bg-[#078c9b] rounded-2xl w-[50%] m-auto mb-[20px] cursor-pointer text-[20px] p-[5px]' onClick={() => login()}>
+                Potwierdź
+            </button>
+            {showPopup && (
+            <div className="fixed inset-0 bg-white/10 backdrop-blur-[1px] flex items-center justify-center z-50">
+            <div className="bg-white/80 text-black p-6 rounded-2xl shadow-xl max-w-md text-center backdrop-blur-sm border border-gray-300">
+                <p className="text-lg mb-4">Musisz wybrać wszystkie preferencje aby przejść dalej</p>
+                <button
+                onClick={() => setShowPopup(false)}
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                OK
+                </button>
+            </div>
+            </div>
+            )}
         </div>
 
     )

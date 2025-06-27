@@ -47,7 +47,7 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
                 className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
                 >
 
-                    Capture photo
+                    Zrób zdjęcie
                     
                 </button>
                 <div className='flex'>
@@ -56,7 +56,7 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
                     className='w-[300px] rounded-br-none rounded-tr-none rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
                     onClick={addPhoto}
                     >
-                        Add photo
+                        Dodaj zdjęcie
                     </button>
                     <ImageUploader
                     photo = {photo}
