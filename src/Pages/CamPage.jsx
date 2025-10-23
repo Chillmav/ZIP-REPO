@@ -16,7 +16,7 @@ export default function CamPage({ setData, setUser }) {
     const formData = new FormData();
     formData.append('photo', file)
 
-    const res = await fetch('http://127.0.0.1:8000/fixing', {
+    const res = await fetch('http://localhost:8000/fixing', {
 
       method: 'POST',
       body: formData
@@ -46,17 +46,19 @@ export default function CamPage({ setData, setUser }) {
       }
 
     }
-    uploadAndSet();
+      uploadAndSet();
 
   }, [file])
 
   return (
     <>
+    
       <WebcamComponent
       setFile = {setFile}
       setPhoto = {setPhoto}
       photo = {photo}
        />
+
     </>
   )
 }

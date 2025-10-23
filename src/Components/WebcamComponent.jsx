@@ -33,38 +33,43 @@ export default function WebcamComponent ({ setFile, setPhoto, photo }) {
     }
 
     return (
-        <div className='flex flex-col backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(17,25,40,0.10)] rounded-2xl p-6 space-y-[40px]'>
+        <div className='flex flex-col bg-[#DDE5B6] p-5 rounded-2xl shadow-md w-[50vw] m-4'>
 
             <Webcam
             ref={webcamRef}
             screenshotFormat='image/jpeg'
-            className='rounded-2xl'
+            className='rounded-xl m-5'
             />
             
-            <div className='flex justify-between space-x-5'>
+            <div className='flex justify-between space-x-5 mx-5'>
                 <button
                 onClick={capture}
-                className='w-[300px] rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
+                className='w-[20vw] rounded-[5px] border-[1px] py-[10px] px-[5px] 
+                                text-[#555B4F]  
+                                bg-[#F7F6F3] cursor-pointer transition duration-300 
+                                hover:bg-gray-50"'
                 >
 
                     Zrób zdjęcie
                     
                 </button>
-                <div className='flex'>
-
+                <div className="flex">
                     <button
-                    className='w-[300px] rounded-br-none rounded-tr-none rounded-[5px] border-[1px] py-[10px] px-[5px] text-black backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer transition-bg-0.3s hover:bg-[rgba(255,255,255,0.6)]'
-                    onClick={addPhoto}
+                        onClick={addPhoto}
+                        className="w-[15vw] rounded-l-[5px] border-[1px] py-[10px] px-[5px] 
+                                text-[#555B4F]  
+                                bg-[#F7F6F3] cursor-pointer transition duration-300 
+                                hover:bg-gray-50"
                     >
                         Dodaj zdjęcie
                     </button>
-                    <ImageUploader
-                    photo = {photo}
-                    setPhoto = {setPhoto}
-                    setFile={setFile}
-                    />
 
-                </div>
+                    <ImageUploader
+                        photo={photo}
+                        setPhoto={setPhoto}
+                        setFile={setFile}
+                    />
+                    </div>
 
             </div>
         </div>

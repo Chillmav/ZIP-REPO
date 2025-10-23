@@ -12,6 +12,7 @@ export default function Filter({ feature, filters, activeFilters, setActiveFilte
 
     }
     const handleChange = (option) => {
+        
         const isSelected = selected.includes(option);
         const updated = isSelected
             ? selected.filter((val) => val !== option)
@@ -21,6 +22,7 @@ export default function Filter({ feature, filters, activeFilters, setActiveFilte
             ...prev,
             [feature]: updated,
         }));
+
     };
     
     return (

@@ -1,13 +1,15 @@
 from fastapi import APIRouter, HTTPException, Request
-from model.bin.fit_frames_prediction import main
+from model.fit_frames_prediction import main
 from db import frames_collection
 import json
+
 
 router = APIRouter()
 
 async def transform_data(frames_collection, user_data):
-
+    
     from index import fix_id
+    
     raw_frames = await frames_collection.find().to_list(length=None)
     frames = [fix_id(frame) for frame in raw_frames]
 
@@ -25,23 +27,24 @@ async def transform_data(frames_collection, user_data):
     recommended_types = rules_eye_spacing[eye_spacing]
 
     user_data = {
+        
         "colors": user_data[0]["Color"],
-        "maxPrice": user_data[0]["Price"] * 10,
         "marks": user_data[0]["Mark"],
         "stars_color": 2 * user_data[1]["Color"],
-        "stars_price": 2 * user_data[1]["Price"],
         "stars_brand": 2 * user_data[1]["Mark"],
         "ai_impact": user_data[0]["AI"] / 100,
         "type": user_data[0]["Type"],
         "shape": user_data[0]["Shape"],
         "ai_shape": recommended_shapes[0],
         "ai_type": recommended_types[0]
+        
     }
 
     return user_data, frames
 
 
 @router.post("/user")
+
 async def get_user(request: Request):
     try:
 
@@ -54,6 +57,7 @@ async def get_user(request: Request):
         return {"recommendation": recommendation}
     
     except Exception as e:
+        
         raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
 
         

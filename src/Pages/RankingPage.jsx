@@ -1,88 +1,39 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import FrameBox from "../Components/FrameBox";
 import priceTransform from "../utils/priceTransform.js";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import FilterBox from "../Components/FilterBox.jsx";
 
-export default function RankingPage({ data, user }) {
+export default function RankingPage({ data }) {
 
-    const [filters, setFilters] = useState();
-    const [activeFilters, setActiveFilters] = useState(null);
-    const [priceRange, setPriceRange] = useState([0, 1000]);
-
-    const { recommendation } = data;
-
+    const [frames, setFrames] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const framesPerPage = 10;
 
-    const resetFilters = () => {
-    if (!filters) return;
-    const reset = {};
-    for (const key in filters) {
-        reset[key] = [];
-    }
-    setActiveFilters(reset);
-    setPriceRange([0, 1000]); 
-};
-    const keyMap = {
-        Shape: 'shape',
-        Color: 'color',
-        Type: 'type',
-        Mark: 'mark',
-    };
+    console.log(frames)
 
-    console.log(recommendation)
-    const filteredFrames = useMemo(() => {
-
-        if (!activeFilters) return recommendation;
-
-        return recommendation.filter(frame => {
-            const priceInPLN = frame.price / 100;
-            if (priceInPLN < priceRange[0] || priceInPLN > priceRange[1]) {
-                return false;
-            }
-
-            for (const key in activeFilters) {
-                if (activeFilters[key].length === 0) continue;
-
-                const frameKey = keyMap[key];
-                const frameValue = frame[frameKey];
-
-                if (!activeFilters[key].includes(frameValue)) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-    }, [recommendation, activeFilters, priceRange]);
-
-
-    const totalPages = Math.ceil(filteredFrames.length / framesPerPage);
+    const totalPages = Math.ceil(frames.length / framesPerPage);
     const lastPostIndex = currentPage * framesPerPage;
     const firstPostIndex = lastPostIndex - framesPerPage;
-    const currentFrames = filteredFrames.slice(firstPostIndex, lastPostIndex);
-
-useEffect(() => {
-  fetch('http://localhost:8000/frames')
-    .then(res => res.json())
-    .then(data => {
-      setFilters(data);
-
-      const initialActiveFilters = {};
-      for (const key in data) {
-        initialActiveFilters[key] = []; 
-      }
-
-      setActiveFilters(initialActiveFilters);
-    });
-}, []);
-
+    const currentFrames = frames.slice(firstPostIndex, lastPostIndex);
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [activeFilters]);
+    }, []);
+
+    useEffect(() => {
+    const storedFrames = localStorage.getItem("frames");
+    if (storedFrames) {
+        setFrames(JSON.parse(storedFrames));
+    }
+    }, []);
+
+    useEffect(() => {
+    if (data?.recommendation && data.recommendation.length > 0) {
+        setFrames(data.recommendation);
+        localStorage.setItem("frames", JSON.stringify(data.recommendation));
+    }
+    }, [data]);
 
     return (
         <div className="flex flex-row">
@@ -124,7 +75,7 @@ useEffect(() => {
                 </div>
 
             </div>
-            {filters ? <FilterBox filters={filters} activeFilters={activeFilters} setActiveFilters={setActiveFilters} resetFilters = {resetFilters} priceRange={priceRange} setPriceRange={setPriceRange}/> : <></>}
+        
         </div>
     );
 }

@@ -20,10 +20,10 @@ export default function ImageUploader( { setPhoto }) {
         className="object-cover"
         >
             <button
-            className="w-full h-full backdrop-blur-[16px] backdrop-saturate-[180%] bg-[rgba(255,255,255,0.4)] cursor-pointer rounded-br-[5px] rounded-tr-[5px] border-[1px]"
+            className="backdrop-blur-[16px] backdrop-saturate-[180%] bg-[#F7F6F3] cursor-pointer rounded-br-[5px] rounded-tr-[5px] border-r-[1px] border-y-[1px]"
             onClick={handleClick}>
                 <FaUpload
-                className="w-[50px] h-100% "
+                className="w-[5vw] h-10 p-2 m-2"
                  />
             </button>
 

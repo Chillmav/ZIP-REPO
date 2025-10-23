@@ -19,7 +19,7 @@ def fix_id(doc):
     doc["_id"] = str(doc["_id"])
     return doc
 
-app.mount("/public", StaticFiles(directory="/home/chillmaw/Projects/ZIP-REPO/public"), name="public")
+app.mount("/public", StaticFiles(directory="C:\\Users\\Kubus\\Desktop\\INZYNIERKA\\src\\public"), name="public")
 
 
 

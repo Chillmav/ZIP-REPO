@@ -2,7 +2,7 @@ import './../styles/FrameBox.css'
 
 export default function FrameBox({ price, img, name, material, color, mark, shape, score }) {
 
-    const percent = Math.min(Math.round(score / 1.6 * 100) + 30, 100);
+    const percent = score * 100;
     
     // Ustal kolor na podstawie wartości percent
     let matchColor = 'bg-red-600';
@@ -15,7 +15,7 @@ export default function FrameBox({ price, img, name, material, color, mark, shap
     return (
         <div className="flex border-solid border-[3px] rounded-[10px] border-[rgb(146,146,146)] w-auto relative">
             <div className='flex items-center justify-center min-w-[300px] min-h-[200px] rounded-2xl'>
-                <img src={`./../backend/zdjecia_oprawek/${img}`} className='rounded-2xl w-[240px] h-[160px] align-middle justify-center'/>
+                <img src={`src\\public\\${img}`} className='rounded-2xl w-[240px] h-[160px] align-middle justify-center'/>
             </div>
 
             <div className='mt-3 flex flex-row mb-4'>
