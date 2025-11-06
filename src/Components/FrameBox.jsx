@@ -2,7 +2,7 @@ import './../styles/FrameBox.css'
 
 export default function FrameBox({ price, img, name, material, color, mark, shape, score }) {
 
-    const percent = score * 100;
+    const percent = Math.floor(score * 100) - 20;
     
     // Ustal kolor na podstawie wartości percent
     let matchColor = 'bg-red-600';

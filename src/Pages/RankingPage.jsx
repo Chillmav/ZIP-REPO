@@ -36,8 +36,8 @@ export default function RankingPage({ data }) {
     }, [data]);
 
     return (
-        <div className="flex flex-row">
-            <div className="flex flex-col rounded-2xl h-auto border-[2px] p-[10px] border-[rgb(146,146,146)] space-y-2 w-[1000px] mb-[200px] backdrop-blur-[8px] backdrop-saturate-[200%] bg-[rgba(255, 255, 255, 0.8)]">
+        <div className="flex flex-row h-[80vh] overflow-auto custom-scrollbar pr-6">
+            <div className="flex flex-col rounded-2xl h-auto p-[10px] space-y-2 w-[1000px] mb-[200px]">
                 {currentFrames.map((item) => (
                     <FrameBox
                         key={item._id}
