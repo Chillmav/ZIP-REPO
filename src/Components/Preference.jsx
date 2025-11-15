@@ -3,6 +3,7 @@ import './../styles/scroll.css';
 
 export default function Preference( {preference, userPreferences, setUserPreferences, userImportances, setUserImportances, preferences} ) {
 
+    const showStars = preference === "Color" || preference === "Mark";
 
     const featureMap = {
         "Shape": "Kształt",
@@ -26,11 +27,12 @@ export default function Preference( {preference, userPreferences, setUserPrefere
         <div className="flex flex-col space-y-2 mr-5">
             <div className="flex ">
                 <p className="text-[20px] text-[#555B4F] font-bold">{featureMap[preference]}:</p>
-                <Stars
+                {showStars && <Stars
                 preference={preference}
                 value={userImportances[preference]}
                 setUserImportances={setUserImportances}
-                /> 
+                /> }
+                
                 
             </div>
 

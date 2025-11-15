@@ -6,7 +6,6 @@ export default function LogPage({ setUser }) {
 
     const [preferences, setPreferences] = useState({});
     const [showPopup, setShowPopup] = useState(false);
-    
     useEffect(() => {
 
         console.log("Fetching frames")
@@ -38,9 +37,7 @@ export default function LogPage({ setUser }) {
 
     const [userImportances, setUserImportances] = useState({
 
-        Shape: 2.5,
         Mark: 2.5,
-        Type: 2.5,
         Color: 2.5
 
     })
