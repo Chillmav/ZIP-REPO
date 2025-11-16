@@ -10,8 +10,9 @@ router = APIRouter()
 @router.post("/fixing")
 async def control_ai(photo: UploadFile = File(...)):
 
-    photo_path = "C:\\Users\\Kubus\\Desktop\\INZYNIERKA\\backend\\photos\\photo1.jpg"
-
+    # photo_path = "C:\\Users\\Kubus\\Desktop\\INZYNIERKA\\backend\\photos\\photo1.jpg" # PC
+    photo_path = "C:\\Users\\Kuba\\Desktop\\projects\\INZYNIERKA\\backend\\photos\\photo1.jpg" # LAPTOP
+    
     with open(photo_path, "wb") as f:
         content = await photo.read()
         f.write(content)
