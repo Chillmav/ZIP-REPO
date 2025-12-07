@@ -4,8 +4,10 @@ import Preferences from '../Components/Preferences';
 
 export default function LogPage({ setUser }) {
 
-    const [preferences, setPreferences] = useState({});
+    
     const [showPopup, setShowPopup] = useState(false);
+
+    const [preferences, setPreferences] = useState({});
     useEffect(() => {
 
         console.log("Fetching frames")
@@ -20,6 +22,7 @@ export default function LogPage({ setUser }) {
         )
         
     }, [])
+
 
     const [userPreferences, setUserPreferences] = useState(
 

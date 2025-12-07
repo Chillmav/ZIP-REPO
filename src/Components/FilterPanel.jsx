@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function FilterPanel({ open, onClose, frames, onApply }) {
-  const materials = [...new Set(frames.map(f => f.material))];
+  const materials = [...new Set(frames.map(f => f.type))];
   const colors = [...new Set(frames.map(f => f.color))];
   const shapes = [...new Set(frames.map(f => f.shape))];
   const [selectedMaterials, setSelectedMaterials] = useState([]);

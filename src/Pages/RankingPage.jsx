@@ -27,6 +27,7 @@ export default function RankingPage({ data }) {
       setFrames(parsed);
       setFilteredFrames(parsed);
       setLoading(false);
+      console.log(parsed.length)
     }
   }, []);
 
@@ -36,6 +37,7 @@ export default function RankingPage({ data }) {
       setFilteredFrames(data.recommendation);
       localStorage.setItem("framesData", JSON.stringify(data.recommendation));
       setLoading(false);
+      console.log(data.length)
     }
   }, [data]);
 
